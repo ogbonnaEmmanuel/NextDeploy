@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: next-app
+  labels:
+    app: next-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: next-app
+  template:
+    metadata:
+      labels:
+        app: next-app
+    spec:
+      containers:
+        - name: next-container
+          image: us-central1-docker.pkg.dev/gke-demo1-437208/gke-repo/next-app
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
